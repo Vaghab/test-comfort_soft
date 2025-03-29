@@ -1,0 +1,30 @@
+.search-field {
+  margin-top: 10px;
+  width: 600px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.grid-header,
+.grid-address {
+  display: grid;
+  grid-template-columns: 1fr 2fr 5fr;
+  min-height: 40px;
+  border-bottom: 1px solid #ccc;
+  & div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.grid-address {
+  &:hover {
+    cursor: pointer;
+    background-color: #dfdfdf;
+  }
+
+  &:active {
+    background-color: #999;
+  }
+}

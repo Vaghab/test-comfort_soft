@@ -1,0 +1,53 @@
+<div>
+  <div>
+    <p-image
+      src="https://img.freepik.com/free-photo/beautiful-milky-way-night-sky_53876-139825.jpg?t=st=1743107093~exp=1743110693~hmac=f90bcab5f8700e2260e7f54bacb74b040062200d56816781f67f8a1b3e01aa1e&w=1380"
+      alt="Image"
+      [imageStyle]="{ width: '600px', borderRadius: '6px' }"
+    ></p-image>
+  </div>
+  <form [formGroup]="searchForm">
+    <div class="search-field">
+      <p-autoComplete
+        formControlName="search"
+        placeholder="Поиск библиотек"
+        [inputStyle]="{ width: '500px' }"
+      ></p-autoComplete>
+      <p-button label="Искать" (onClick)="toSearch()"></p-button>
+    </div>
+  </form>
+
+  @if(librariesVisible){
+  <p-dataView
+    [lazy]="true"
+    [rows]="10"
+    [paginator]="true"
+    [value]="librariesToShow"
+    [style]="{ 'margin-top': '10px' }"
+  >
+    <ng-template pTemplate="header" let-columns>
+      <div class="grid-header">
+        <div><span>№</span></div>
+        <div><span>Название</span></div>
+        <div><span>Адрес</span></div>
+      </div>
+      @for (lib of librariesToShow; track lib; let index = $index) {
+      <div class="grid-address" (click)="viewLibrayCard(lib)">
+        <div>
+          <span>{{ index + 1 }}</span>
+        </div>
+        <div>
+          <span
+            [innerHTML]="highlightText(lib.name, searchForm.value.search || '')"
+            >{{ lib.name }}</span
+          >
+        </div>
+        <div>
+          <span>{{ lib.address }}</span>
+        </div>
+      </div>
+      }
+    </ng-template>
+  </p-dataView>
+  }
+</div>
